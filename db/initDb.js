@@ -45,6 +45,9 @@ const Start = `
     INSERT INTO items (categoryid, brandid, name, price)
     VALUES
         (1,1,'Telecaster', 799.99),
+        (1,1,'Jaguar', 899.99),
+        (1,1,'Stratocaster', 999.99),
+        (1,2,'SG', 1299.99),
         (1,2,'Les Paul Standard', 2299.99 ),
         (1,3,'Pacifica', 279.99),
         (2,1,'Jazz Bass', 1199.99),

@@ -1,0 +1,30 @@
+<div class="flex justify-between w-full h-16 p-4 bg-slate-700 items-center">
+    <a href="/" class="text-2xl font-bold self-start">
+      Music Store Inventory
+    </a>
+
+    <input class="input input-bordered w-1/5 max-w-xs" id="adminpass" type="text" name="adminpass" placeholder="Admin Password">
+    
+    <div class="flex justify-center items-center gap-2">
+      <div class="dropdown dropdown-end dropdown-hover">
+        <div tabindex="0" role="button" class="btn btn-outline m-1 text-zinc-50">Categories</div>
+        <ul tabindex="0" class="dropdown-content menu bg-slate-700 border border-zinc-50 rounded-box z-[1] w-fit p-2 shadow">
+          <% categories.forEach(cat => { %>
+            <li><a href="/categories/<%= cat.categoryname %>"><%= cat.categoryname %></a></li>
+          <% }); %>
+        </ul>
+      </div>
+      <% if (path === '/' || path === '/new') { %>
+        <a href="/new" class="btn btn-outline text-zinc-50">New Item</a>
+      <% } else { %>
+        <div class="dropdown dropdown-end dropdown-hover">
+          <div tabindex="0" role="button" class="btn btn-outline m-1 text-zinc-50">Brands</div>
+          <ul tabindex="0" class="dropdown-content menu bg-slate-700 border border-zinc-50 rounded-box z-[1] w-fit p-2 shadow">
+            <% brands.forEach(brand => { %>
+              <li><a href="/categories/<%= path.split('/')[2] %>/<%= brand.brandname %>"><%= brand.brandname %></a></li>
+            <% }) %>
+          </ul>
+        </div>
+      <% } %>
+    </div>
+  </div>

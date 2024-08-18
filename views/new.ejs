@@ -1,0 +1,42 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <title>Home</title>
+  </head>
+  <body
+    class="flex flex-col h-screen items-center bg-slate-800 text-zinc-50 gap-4"
+  >
+    <%- include('navbar', {categories: categories, path:path}) %>
+  <form id="myform" class="bg-slate-600 rounded-lg bg-opacity-70 flex flex-col w-1/5 justify-center items-center p-3 border border-zinc-300 gap-2"
+  action="insert" method="post">
+    <label class="font-bold text-lg"for="category">Product Category</label>
+    <input class="input input-bordered w-full max-w-xs" type="text" name="category">
+    <label class="font-bold text-lg"for="brand">Product Brand</label>
+    <input class="input input-bordered w-full max-w-xs" type="text" name="brand"> 
+    <label class="font-bold text-lg"for="name">Product Name</label>
+    <input class="input input-bordered w-full max-w-xs" type="text" name="name">
+    <label class="font-bold text-lg"for="price">Product Price</label>
+    <input class="input input-bordered w-full max-w-xs" type="number" name="price">
+    <input id="hiddenfield" class="hidden" type="text" name="adminpass">
+    <button type="submit" class="btn btn-outline w-1/2 mt-2 text-zinc-50">Submit</button>
+  </form>
+  <script>
+    document.getElementById('myform').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const adminpass = document.getElementById('adminpass').value;
+        const hidden = document.getElementById('hiddenfield');
+        hidden.value = adminpass;
+        this.submit();
+       
+    });
+</script>
+    
+  </body>
+</html>
