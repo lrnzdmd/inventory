@@ -39,13 +39,26 @@ app.get("/categories/:catname/:brandname", async (req,res) => {
     res.render("category",  { items: items, categories: allCats, brands: catBrands, path: req.path} )
 })
 
-app.get("/delete", (req,res) => {
+app.get("/deleteitem", (req,res) => {
     const itemid = req.query.itemid;
     const adminpass = req.query.adminpass;
     if (adminpass !== process.env.ADMIN_PASS) {
         res.redirect('/forbidden');
     } else {
         db.deleteItem(itemid);
+        res.redirect('/');
+    }
+
+})
+
+app.get("/deletecat", (req,res) => {
+    const cat = req.query.cat;
+    const adminpass = req.query.adminpass;
+
+    if (adminpass !== process.env.ADMIN_PASS) {
+        res.redirect('/forbidden');
+    } else {
+        db.deleteCategory(cat);
         res.redirect('/');
     }
 

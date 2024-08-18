@@ -64,4 +64,17 @@ async function deleteItem(itemid) {
     await pool.query("DELETE FROM items WHERE id = $1", [itemid])
 }
 
-module.exports = { getAllItems, getAllCategories, getAllCategoryBrands, addNewItem, deleteItem, getItemById, getAllItemsFromCategory,  getAllItemsFromCatAndBrand };
+async function deleteCategory(category) {
+    await pool.query("DELETE FROM categories WHERE categoryname = $1;", [category]);
+}
+
+module.exports = { getAllItems, 
+                    getAllCategories, 
+                    getAllCategoryBrands, 
+                    addNewItem, 
+                    deleteItem, 
+                    deleteCategory, 
+                    getItemById, 
+                    getAllItemsFromCategory,  
+                    getAllItemsFromCatAndBrand 
+                };
