@@ -39,26 +39,26 @@ app.get("/categories/:catname/:brandname", async (req,res) => {
     res.render("category",  { items: items, categories: allCats, brands: catBrands, path: req.path} )
 })
 
-app.get("/deleteitem", (req,res) => {
+app.get("/deleteitem", async (req,res) => {
     const itemid = req.query.itemid;
     const adminpass = req.query.adminpass;
     if (adminpass !== process.env.ADMIN_PASS) {
         res.redirect('/forbidden');
     } else {
-        db.deleteItem(itemid);
+       await db.deleteItem(itemid);
         res.redirect('/');
     }
 
 })
 
-app.get("/deletecat", (req,res) => {
+app.get("/deletecat", async (req,res) => {
     const cat = req.query.cat;
     const adminpass = req.query.adminpass;
 
     if (adminpass !== process.env.ADMIN_PASS) {
         res.redirect('/forbidden');
     } else {
-        db.deleteCategory(cat);
+        await db.deleteCategory(cat);
         res.redirect('/');
     }
 
@@ -86,11 +86,11 @@ app.get("/new", async (req,res) => {
     res.render("new",{categories: allCats, brands: catBrands, path: req.path});
 })
 
-app.post("/insert", (req,res) => {
+app.post("/insert", async (req,res) => {
     if (req.body.adminpass !== process.env.ADMIN_PASS) {
     res.redirect("/forbidden");
     } else {
-        db.addNewItem(req.body.category, req.body.brand, req.body.name, req.body.price);
+        await db.addNewItem(req.body.category, req.body.brand, req.body.name, req.body.price);
         res.redirect("/");
     }
 })
