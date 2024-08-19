@@ -64,6 +64,22 @@ app.get("/deletecat", (req,res) => {
 
 })
 
+app.get("/editcat", async (req, res) => {
+    const catname = req.query.cat;
+    const allCats = await db.getAllCategories();
+    res.render('editCat', { categories: allCats, category: catname, path: req.path});
+
+})
+
+app.get("/edititem", async (req, res) => {
+    const itemId = req.query.itemid;
+    const allCats = await db.getAllCategories();
+    const itemInfo = await db.getItemById(itemId);
+    res.render('editItem', { categories: allCats, item: itemInfo[0], path:req.path })
+    
+
+})
+
 app.get("/new", async (req,res) => {
     const allCats = await db.getAllCategories();
     const catBrands = await db.getAllCategoryBrands(req.params.catname, req.params.brandname);
@@ -78,6 +94,27 @@ app.post("/insert", (req,res) => {
         res.redirect("/");
     }
 })
+
+app.post("/editcat", async (req, res) => {
+    if (req.body.adminpass !== process.env.ADMIN_PASS) {
+        res.redirect("/forbidden");
+        } else {
+            await db.editCategory(req.body.old, req.body.new);
+            res.redirect("/");
+        }
+
+})
+
+app.post("/edititem", async (req,res) => {
+    if (req.body.adminpass !== process.env.ADMIN_PASS) {
+        res.redirect("/forbidden");
+        } else {
+            await db.editItem(req.body.id, req.body.category, req.body.brand, req.body.name, req.body.price);
+            res.redirect("/");
+        }
+})
+
+
 
 app.get("/forbidden", (req, res) => {
     res.render("forbidden");

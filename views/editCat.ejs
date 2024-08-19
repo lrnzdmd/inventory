@@ -8,22 +8,18 @@
       rel="stylesheet"
       type="text/css"
     />
-    <title>Home</title>
+    <title>Edit Category</title>
   </head>
   <body
     class="flex flex-col h-screen items-center bg-slate-800 text-zinc-50 gap-4"
   >
     <%- include('navbar', {categories: categories, path:path}) %>
   <form id="myform" class="bg-slate-600 rounded-lg bg-opacity-70 flex flex-col w-1/5 justify-center items-center p-3 border border-zinc-300 gap-2"
-  action="/insert" method="post">
-    <label class="font-bold text-lg"for="category">Product Category</label>
-    <input class="input input-bordered w-full max-w-xs" type="text" name="category">
-    <label class="font-bold text-lg"for="brand">Product Brand</label>
-    <input class="input input-bordered w-full max-w-xs" type="text" name="brand"> 
-    <label class="font-bold text-lg"for="name">Product Name</label>
-    <input class="input input-bordered w-full max-w-xs" type="text" name="name">
-    <label class="font-bold text-lg"for="price">Product Price</label>
-    <input class="input input-bordered w-full max-w-xs" step="any" type="number" name="price">
+  action="/editcat" method="post">
+  <label class="font-bold text-lg"for="old">Old category name</label>
+  <input readonly class="input input-bordered w-full max-w-xs" type="text" name="old" value="<%= category %>">
+    <label class="font-bold text-lg"for="new">New category name</label>
+    <input class="input input-bordered w-full max-w-xs" type="text" name="new">
     <input id="hiddenfield" class="hidden" type="text" name="adminpass">
     <button type="submit" class="btn btn-outline w-1/2 mt-2 text-zinc-50">Submit</button>
   </form>
